@@ -6,7 +6,7 @@
            {{$post->extract}}
      </div>
 
-     <div class="grid grid-cols-3">
+     <div class="grid grid-cols-3 gap-6">
          {{-- contenido principal --}}
        <div class="col-span-2">
          <figure>
@@ -21,7 +21,7 @@
 
        {{-- contenido relacionado --}}
        <aside>
-         <h1>Mas en {{$post->category->name}}</h1>
+         <h1 class="text-2xl font-bold text-blue-600 mb-4">Mas en {{$post->category->name}}</h1>
        </aside>
      </div>
 

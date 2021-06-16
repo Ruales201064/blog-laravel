@@ -6,9 +6,9 @@
            {{$post->extract}}
      </div>
 
-     <div class="grid grid-cols-3 gap-6">
+     <div class="grid grid-cols-1  lg:grid-cols-3  gap-6">
          {{-- contenido principal --}}
-       <div class="col-span-2">
+       <div class="lg:col-span-2">
          <figure>
             <img class="w-full h-80 object-cover object-center"   src="{{Storage::url($post->image->url)}}" alt="">
          </figure>
@@ -22,7 +22,19 @@
        {{-- contenido relacionado --}}
        <aside>
          <h1 class="text-2xl font-bold text-blue-600 mb-4">Mas en {{$post->category->name}}</h1>
-       </aside>
+       
+            <ul>
+               @foreach ($similares as $similar)
+              <li class="mb-4">
+                     <a class="flex" href="{{route('posts.show', $similar)}}">
+                      <img class="w-36 h-25 object-cover object-center" src="{{Storage::url($similar->image->url)}}" alt="">
+                      <span class="ml-3 text-black-600">{{$similar->name}}</span>
+                    </a>                  
+             </li>
+               @endforeach
+            </ul>
+
+        </aside>
      </div>
 
     </div>

@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
-
+    protected $fillable=['name','slug','color'];
     //relacion de muchos a muchos
     public function post(){
         return $this->belongsToMany(Post::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

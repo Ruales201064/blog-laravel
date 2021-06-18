@@ -3,11 +3,12 @@
 @section('title', 'Blog')
 
 @section('content_header')
-    <h1>Lista de categorias</h1>
+    <h1>Lista de Posts</h1>
 @stop
 
 @section('content')
-    
+    @livewire('admin.post-index')    
+
    @if (session('info'))
           <div class="alert alert-danger">
               <strong>{{session('info')}}</strong>
@@ -16,7 +17,7 @@
 
    <div class="card">      
     <div class="card-header">
-        <a class="btn btn-success" href="{{route('admin.categories.create')}}">Agregar Categoria</a>
+        <a class="btn btn-success" href="{{route('admin.posts.create')}}">Agregar Posts</a>
     </div>
         <div class="card-body">
         <table class="table table-striped">
@@ -24,20 +25,24 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Extract</th>
+                    {{-- <th>Body</th> --}}
                     <th colspan="2"></th>
                 </tr>
             </thead>
 
             <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($posts as $post)
                         <tr>
-                            <td>{{$category->id}}</td>
-                            <td>{{$category->name}}</td>
+                            <td>{{$post->id}}</td>
+                            <td>{{$post->name}}</td>
+                            <td>{{$post->extract}}</td>
+                            {{-- <td>{{$post->body}}</td> --}}
                             <td width="10px">
-                               <a class="btn btn-primary btn-sm" href="{{route('admin.categories.edit',$category)}}">Editar</a>
+                               <a class="btn btn-primary btn-sm" href="{{route('admin.posts.edit',$post)}}">Editar</a>
                             </td>
                             <td width="10px">
-                                <form action="{{route('admin.categories.destroy',$category)}}" method="post">
+                                <form action="{{route('admin.posts.destroy',$post)}}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

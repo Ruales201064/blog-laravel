@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-class CategoryController extends Controller
+use App\Models\Post;
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
-        return view('admin.categories.index',compact('categories'));
+        $posts=Post::all();
+        return view('admin.posts.index',compact('posts'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        //
     }
 
     /**
@@ -36,13 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-             'slug'=>'required|unique:categories'    
-        ]);
-       $category = Category::create($request->all());
-       
-       return redirect()->route('admin.categories.edit',$category)->with('info','Registro exitoso');
+        //
     }
 
     /**
@@ -51,9 +45,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Post $post)
     {
-        return view('admin.categories.show',compact('category'));
+         return view('admin.posts.show',compact('post'));
     }
 
     /**
@@ -62,9 +56,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Post $post)
     {
-        return view('admin.categories.edit',compact('category'));
+        return view('admin.posts.show',compact('post'));
     }
 
     /**
@@ -74,17 +68,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Category $category)
+    public function update(Request $request, Post $post)
     {
-        $request->validate([
-            'name'=>'required',
-             'slug'=>"required|unique:categories,slug,$category->id"    
-        ]);
-
-
-        $category->update($request->all());
-
-        return redirect()->route('admin.categories.edit',$category)->with('info','Actualizado con exito');
+        //
     }
 
     /**
@@ -93,10 +79,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Post $post)
     {
-         $category->delete();
-
-         return redirect()->route('admin.categories.index',$category)->with('info','Eliminado Con exito');
+        //
     }
 }

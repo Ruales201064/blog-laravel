@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-       $publicaciones =Post::factory(28)->create();
+       $publicaciones =Post::factory(300)->create();
         foreach($publicaciones as $post){
              Image::factory(1)->create([
                  'imageable_id'=>$post->id,

@@ -50,4 +50,9 @@
       @else 
         <strong>Registro No Encontrado</strong>
       @endif
+
+
+
+
+      
     </div>

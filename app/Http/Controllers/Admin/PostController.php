@@ -59,7 +59,7 @@ class PostController extends Controller
            if($request->tags){
                 $post->tags()->attach($request->tags);
             }
-            return redirect()->route('admin.posts.edit',$post);
+            return redirect()->route('admin.posts.edit',$post)->with('info','Registro  exitoso');
     }
 
     /**
@@ -95,7 +95,26 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->update($request->all());
+        if($request->file('file')){
+            $url = Storage::put('public/posts', $request->file('file'));
+            if($post->image){
+            Storage::delete($post->image->url);
+            $post->image->update([
+             'url'=>$url
+            ]);
+            }else{
+                $post->image->create([
+                    'url'=>$url
+                ]);
+            }
+        }
+
+        if($request->tags){
+            $post->tags()->sync($request->tags);
+        }
+        return redirect()->route('admin.posts.edit',$post)->with('info','Actualizado con exito');
+   
     }
 
     /**
@@ -106,6 +125,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index',$post)->with('info','Eliminado Con exito');
     }
 }

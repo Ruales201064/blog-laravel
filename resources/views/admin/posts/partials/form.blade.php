@@ -45,12 +45,12 @@
  <div class=form-group>
    <p class="font-weight-bold">Estado</p>
    <label>
-     {!! Form::radio('status', 1, true) !!}
+    {!! Form::radio('status', 2, false) !!}
      Borrador
    </label>
 
    <label>
-     {!! Form::radio('status', 2, false) !!}
+    {!! Form::radio('status', 1, true) !!}  
      Publicado
    </label>
    
